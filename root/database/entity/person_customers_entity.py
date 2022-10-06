@@ -5,7 +5,7 @@ from root.database.manager.repository_manager import RepositoryManager
 
 
 class PersonCustomersEntity(injector.get(RepositoryManager).base):
-    __tablename__ = 'person_customers'
+    __tablename__ = 'customers'
 
     customer_id: Column = Column(Integer, autoincrement=True, unique=True)
     first_name: Column = Column(String(50))
