@@ -1,6 +1,5 @@
 from abc import ABCMeta, abstractmethod
-from root.database.entity.person_customers_entity import PersonCustomersEntity
-from root.database.entity.company_customers_entity import CompanyCustomersEntity
+from root.database.entity.customers_entity import CustomersEntity
 
 
 class AbstractCustomersRepository(metaclass=ABCMeta):
