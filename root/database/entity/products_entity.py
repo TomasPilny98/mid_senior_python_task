@@ -1,16 +1,16 @@
-from sqlalchemy import Column, Integer, ForeignKey
+from sqlalchemy import String, Column, Integer, Float
 
 from root.main.dependency_injection_init import injector
 from root.database.manager.repository_manager import RepositoryManager
 
 
-class OrderItemsEntity(injector.get(RepositoryManager).base):
-    __tablename__ = 'order_items'
+class ProductsEntity(injector.get(RepositoryManager).base):
+    __tablename__ = 'products'
 
     id: Column = Column(Integer, primary_key=True, autoincrement=True)
-    order_id: Column = Column(Integer, ForeignKey('orders.id'))
-    product_id: Column = Column(Integer, ForeignKey('products.id'))
-    quantity: Column = Column(Integer)
+    product_name: Column = Column(String(255))
+    description: Column = Column(String(255))
+    unit_price: Column = Column(Float)
 
 
 injector.get(RepositoryManager).base.metadata.create_all(injector.get(RepositoryManager).engine)

@@ -1,12 +1,11 @@
 from injector import singleton
-import flask
-from flask import json, jsonify
+from flask import jsonify
 from flask_classful import FlaskView, route
 
 from root.customer.customer_model import CustomerModel
-from root.manager.customer_manager import CustomerManager
-from root.manager.order_manager import OrderManager
-from root.json_convertor import JsonConvertor
+from root.customer.customer_manager import CustomerManager
+from root.order.order_manager import OrderManager
+from root.rest.json_convertor import JsonConvertor
 from root.main.dependency_injection_init import injector
 from root.order.order_model import OrderModel
 
@@ -14,24 +13,29 @@ from root.order.order_model import OrderModel
 @singleton
 class RestController(FlaskView):
     test_order_json = {
+        "customerId": 1,
         "items": [
             {
                 "itemId": 0,
+                "itemName": "Car",
                 "price": 100,
                 "description": "awesome item"
             },
             {
                 "itemId": 1,
+                "itemName": "Car2",
                 "price": 200,
                 "description": "also awesome item"
             },
             {
                 "itemId": 2,
+                "itemName": "Car3",
                 "price": 300,
                 "description": "awesome item too"
             },
             {
                 "itemId": 3,
+                "itemName": "Car4",
                 "price": 400,
                 "description": "awesome item rly"
             }
@@ -70,24 +74,28 @@ class RestController(FlaskView):
         print(new_customer_model)
         return jsonify(success=True)
 
-    @route('/delete-customer', methods=['DELETE'])
+    @route('/delete-customer', methods=['POST'])
     def delete_customer(self):
         pass
 
-    @route('/create-order', methods=['POST'])
+    @route('/get-all-customers-data', methods=['GET'])
+    def delete_customer(self):
+        pass
+
+    @route('/create-order', methods=['GET', 'POST'])
     def create_order(self):
-        json_data: json = flask.request.json
-        new_order_model: OrderModel = self._json_convertor.to_order_model(self.test_order_json)  # json_data
+        new_order_model: OrderModel = self._json_convertor.to_order_model(self.test_order_json)
+        print(new_order_model)
         return jsonify(success=True)
 
-    @route('/delete-order', methods=['DELETE'])
+    @route('/delete-order', methods=['POST'])
     def delete_order(self):
         pass
 
-    @route('/update-order', methods=['POST'])
-    def update_order(self):
+    @route('/add-item', methods=['post'])
+    def add_item(self):
         pass
 
-    @route('/get-all-customers', methods=['GET'])
-    def get_all_customers(self):
+    @route('/remove-item', methods=['post'])
+    def remove_item(self):
         pass

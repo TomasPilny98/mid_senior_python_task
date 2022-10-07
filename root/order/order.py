@@ -1,6 +1,5 @@
 from root.order.order_model import OrderModel
 from root.item.item_model import ItemModel
-from root.customer.customer_contact_model import CustomerContactModel
 from root.order.abstract_order import AbstractOrder
 from overrides import overrides
 
@@ -8,11 +7,11 @@ from overrides import overrides
 class Order(AbstractOrder):
 
     def __init__(self,
-                 contacts: CustomerContactModel,
+                 customer_id: int,
                  items: list[ItemModel],
                  internal_id: int,
                  total_cost: float):
-        self._order_model: OrderModel = OrderModel(contacts, items, internal_id, total_cost)
+        self._order_model: OrderModel = OrderModel(customer_id, items, internal_id, total_cost)
 
     @overrides
     def get_order_id(self) -> str | int:

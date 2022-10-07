@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_cors import CORS
-from root._rest.rest_controller import RestController
+from root.rest.rest_controller import RestController
 
 
 class FlaskInitializer:
@@ -8,6 +8,8 @@ class FlaskInitializer:
     def __init__(self):
         self._app: Flask = Flask(__name__)
         self._app.config['CORS_HEADERS'] = 'Content-type'
+        # don't store secret_key like this in production, this is for development purpose only
+        self._app.config['SECRET_KEY'] = '/xa1/xb4/x02,Rg/x89L/x19/xaab/xf5'
         self.init_rest_controller()
         CORS(self._app)
 
