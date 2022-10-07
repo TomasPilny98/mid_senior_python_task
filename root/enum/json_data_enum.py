@@ -21,9 +21,11 @@ class JsonDataEnum(Enum):
 
     ITEMS = 'items'
     ITEM_ID = 'itemId'
+    ITEM_NAME = 'itemName'
     PRICE = 'price'
     DESCRIPTION = 'description'
 
     CUSTOMER_TYPE = 'customerType'
+    CUSTOMER_ID = 'customerId'
     PERSON = 'person'
     COMPANY = 'company'

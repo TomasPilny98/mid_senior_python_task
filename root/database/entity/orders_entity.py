@@ -1,4 +1,4 @@
-from sqlalchemy import String, Column, Integer, ForeignKey, Float
+from sqlalchemy import Column, Integer, ForeignKey, Float
 
 from root.main.dependency_injection_init import injector
 from root.database.manager.repository_manager import RepositoryManager
@@ -11,3 +11,8 @@ class OrdersEntity(injector.get(RepositoryManager).base):
     customer_id: Column = Column(Integer, ForeignKey('customers.id'))
     order_number: Column = Column(Integer)
     total_price: Column = Column(Float)
+
+
+injector.get(RepositoryManager).base.metadata.create_all(injector.get(RepositoryManager).engine)
+injector.get(RepositoryManager).session_scope.commit()
+injector.get(RepositoryManager).session.remove()

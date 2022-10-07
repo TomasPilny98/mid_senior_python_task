@@ -12,3 +12,7 @@ class ProductsEntity(injector.get(RepositoryManager).base):
     description: Column = Column(String(255))
     unit_price: Column = Column(Float)
 
+
+injector.get(RepositoryManager).base.metadata.create_all(injector.get(RepositoryManager).engine)
+injector.get(RepositoryManager).session_scope.commit()
+injector.get(RepositoryManager).session.remove()

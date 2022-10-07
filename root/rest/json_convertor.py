@@ -4,7 +4,7 @@ from root.company.company_model import CompanyModel
 from root.order.order_model import OrderModel
 from root.person.person_model import PersonModel
 from root.item.item_model import ItemModel
-from root._enum.json_data_enum import JsonDataEnum
+from root.enum.json_data_enum import JsonDataEnum
 from injector import singleton
 
 
@@ -23,7 +23,7 @@ class JsonConvertor:
         else:
             raise Exception('Unknown customer type, JSON parse error')
 
-        return CustomerModel(customer_type=customer_type)
+        return CustomerModel(customer_data=customer_type)
 
     def to_person_model(self, raw_json: dict) -> PersonModel:
         return PersonModel(first_name=raw_json[str(JsonDataEnum.FIRST_NAME)],
@@ -36,13 +36,15 @@ class JsonConvertor:
                             dic=raw_json[str(JsonDataEnum.DIC)],
                             ico=raw_json[str(JsonDataEnum.ICO)])
 
-    def to_order_model(self, raw_json: dict) -> OrderModel:
+    @staticmethod
+    def to_order_model(raw_json: dict) -> OrderModel:
         items: list[ItemModel] = []
         for item in raw_json[str(JsonDataEnum.ITEMS)]:
             items.append(ItemModel(item[str(JsonDataEnum.ITEM_ID)],
+                                   item[str(JsonDataEnum.ITEM_NAME)],
                                    item[str(JsonDataEnum.PRICE)],
                                    item[str(JsonDataEnum.DESCRIPTION)]))
-        return OrderModel(contacts=self.to_contacts_model(raw_json), items=items)
+        return OrderModel(customer_id=raw_json[str(JsonDataEnum.CUSTOMER_ID)], items=items)
 
     @staticmethod
     def to_contacts_model(raw_json: dict) -> CustomerContactModel:

@@ -6,5 +6,5 @@ from root.order.order_model import OrderModel
 
 @dataclass
 class CustomerModel:
-    customer_type: PersonModel | CompanyModel
-    order: list[OrderModel] | None = None
+    customer_data: PersonModel | CompanyModel
+    orders: list[OrderModel] | None = None

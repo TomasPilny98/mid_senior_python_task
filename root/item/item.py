@@ -5,8 +5,8 @@ from overrides import overrides
 
 class Item(AbstractItem):
 
-    def __init__(self, item_id: int, price: float, description: str):
-        self._item_model: ItemModel = ItemModel(item_id, price, description)
+    def __init__(self, item_id: int, item_name: str, price: float, description: str):
+        self._item_model: ItemModel = ItemModel(item_id, item_name, price, description)
 
     @overrides
     def get_item_id(self) -> int:
