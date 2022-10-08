@@ -1,7 +1,7 @@
 from abc import ABCMeta, abstractmethod
 
-from root.order.order_model import OrderModel
-from root.item.item_model import ItemModel
+from root.model.order_model import OrderModel
+from root.model.product_model import ProductModel
 
 
 class AbstractOrdersRepository(metaclass=ABCMeta):
@@ -15,7 +15,7 @@ class AbstractOrdersRepository(metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def add_item(self, order_id: int, item_model: ItemModel) -> None:
+    def add_item(self, order_id: int, item_model: ProductModel) -> None:
         pass
 
     @abstractmethod
@@ -23,5 +23,5 @@ class AbstractOrdersRepository(metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def get_all_order_items(self, order_id: int) -> list[ItemModel]:
+    def get_all_order_items(self, order_id: int) -> list[ProductModel]:
         pass

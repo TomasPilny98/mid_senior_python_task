@@ -1,4 +1,4 @@
-from root.customer.customer_contact_model import CustomerContactModel
+from root.model.customer_contact_model import CustomerContactModel
 from dataclasses import dataclass
 from datetime import datetime
 
@@ -7,5 +7,5 @@ from datetime import datetime
 class PersonModel:
     first_name: str
     last_name: str
-    birth_date: datetime
+    birth_date: datetime.date
     contacts: CustomerContactModel

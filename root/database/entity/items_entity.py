@@ -2,14 +2,16 @@ from sqlalchemy import Column, Integer, ForeignKey
 
 from root.main.dependency_injection_init import injector
 from root.database.manager.repository_manager import RepositoryManager
+from root.database.entity.orders_entity import OrdersEntity
+from root.database.entity.products_entity import ProductsEntity
 
 
-class OrderItemsEntity(injector.get(RepositoryManager).base):
+class ItemsEntity(injector.get(RepositoryManager).base):
     __tablename__ = 'order_items'
 
     id: Column = Column(Integer, primary_key=True, autoincrement=True)
-    order_id: Column = Column(Integer, ForeignKey('orders.id'))
-    product_id: Column = Column(Integer, ForeignKey('products.id'))
+    order_id: Column = Column(Integer, ForeignKey(OrdersEntity.id))
+    product_id: Column = Column(Integer, ForeignKey(ProductsEntity.id))
     quantity: Column = Column(Integer)
 
 
