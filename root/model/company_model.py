@@ -1,4 +1,4 @@
-from root.customer.customer_contact_model import CustomerContactModel
+from root.model.customer_contact_model import CustomerContactModel
 from dataclasses import dataclass
 
 

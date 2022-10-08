@@ -3,18 +3,18 @@ from injector import inject, singleton
 
 from root.database.abstract.abstract_orders_repository import AbstractOrdersRepository
 from root.database.manager.thread_session_request_manager import ThreadSessionRequestManager
-from root.item.item_model import ItemModel
-from root.order.order_model import OrderModel
-from root.rest.json_convertor import JsonConvertor
+from root.model.product_model import ProductModel
+from root.model.order_model import OrderModel
+from root.rest.parser.customer_json_parser import CustomerJsonParser
 
 
 @singleton
 class OrdersRepository(AbstractOrdersRepository):
 
     @inject
-    def __init__(self, db_session: ThreadSessionRequestManager, json_convertor: JsonConvertor):
+    def __init__(self, db_session: ThreadSessionRequestManager, json_convertor: CustomerJsonParser):
         self._db_session: ThreadSessionRequestManager = db_session
-        self._json_convertor: JsonConvertor = json_convertor
+        self._json_convertor: CustomerJsonParser = json_convertor
 
     @overrides
     def add_order(self, customer_id: int, order_model: OrderModel) -> None:
@@ -25,7 +25,7 @@ class OrdersRepository(AbstractOrdersRepository):
         pass
 
     @overrides
-    def add_item(self, order_id: int, item_model: ItemModel) -> None:
+    def add_item(self, order_id: int, item_model: ProductModel) -> None:
         pass
 
     @overrides
@@ -33,7 +33,7 @@ class OrdersRepository(AbstractOrdersRepository):
         pass
 
     @overrides
-    def get_all_order_items(self, order_id: int) -> list[ItemModel]:
+    def get_all_order_items(self, order_id: int) -> list[ProductModel]:
         pass
 
 

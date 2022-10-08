@@ -1,6 +1,8 @@
 from flask import Flask
 from flask_cors import CORS
-from root.rest.rest_controller import RestController
+from root.rest.controller.customer_rest_controller import CustomerRestController
+from root.rest.controller.order_rest_controller import OrderRestController
+from root.rest.controller.product_rest_controller import ProductRestController
 
 
 class FlaskInitializer:
@@ -18,6 +20,10 @@ class FlaskInitializer:
         return self._app
 
     def init_rest_controller(self):
-        RestController.initialization()
-        RestController.register(self._app, route_base='/')
-        pass
+        CustomerRestController.initialization()
+        CustomerRestController.register(self._app, route_base='/', route_prefix='api/customer')
+        OrderRestController.initialization()
+        OrderRestController.register(self._app, route_base='/', route_prefix='api/order')
+        ProductRestController.initialization()
+        ProductRestController.register(self._app, route_base='/', route_prefix='api/product')
+
